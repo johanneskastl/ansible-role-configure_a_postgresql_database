@@ -79,3 +79,7 @@ None
 ## License
 
 BSD-3-Clause
+
+## Author Information
+
+I am Johannes Kastl, reachable via git@johannes-kastl.de
