@@ -1,0 +1,15 @@
+---
+# configure_a_postgresql_database/defaults/main.yml
+
+postgresql_service_name: 'postgresql.service'
+postgresql_system_user: 'postgres'
+
+postgresql_database_encoding: 'UTF-8'
+postgresql_database_lc_collate: 'en_US.UTF-8'
+postgresql_database_lc_ctype: 'en_US.UTF-8'
+postgresql_database_template: 'template0'
+
+postgresql_user_contype: 'host'
+postgresql_user_login_method: 'md5'
+
+psycopg2_package_name: 'python3-psycopg2'
