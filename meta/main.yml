@@ -1,0 +1,21 @@
+galaxy_info:
+  role_name: 'configure_a_postgresql_database'
+  namespace: 'johanneskastl'
+  author: 'Johannes Kastl'
+  description: 'Basic postgreSQL database configuration (users, permissions, etc.)'
+
+  license: 'BSD-3-Clause'
+
+  min_ansible_version: '2.12'
+
+  platforms:
+    - name: opensuse
+      versions:
+        - all
+    - name: SLES
+      versions:
+        - all
+
+  galaxy_tags: []
+
+dependencies: []
