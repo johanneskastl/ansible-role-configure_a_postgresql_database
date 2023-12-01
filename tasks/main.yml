@@ -18,7 +18,7 @@
 
 - name: 'Allow password logins for the unprivileged user'
   community.postgresql.postgresql_pg_hba:
-    dest: /var/lib/pgsql/data/pg_hba.conf
+    dest: "{{ postgresql_path_to_pg_hba_conf }}"
     contype: "{{ postgresql_user_contype }}"
     users: "{{ postgresql_user_name }}"
     method: "{{ postgresql_user_login_method }}"
