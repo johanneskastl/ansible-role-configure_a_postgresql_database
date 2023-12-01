@@ -1,0 +1,67 @@
+---
+# configure_a_postgresql_database/tasks/main.yml
+
+- name: 'Install the psycopg2 python module'
+  ansible.builtin.package:
+    name: "{{ psycopg2_package_name }}"
+    state: present
+
+- name: 'Create the unprivileged user'
+  community.postgresql.postgresql_user:
+    login_password: "{{ postgresql_login_password }}"
+    #
+    name: "{{ postgresql_user_name }}"
+    password: "{{ postgresql_user_password }}"
+  become_user: "{{ postgresql_system_user }}"
+  notify:
+    - 'Restart the postgresql service'
+
+- name: 'Allow password logins for the unprivileged user'
+  community.postgresql.postgresql_pg_hba:
+    dest: /var/lib/pgsql/data/pg_hba.conf
+    contype: "{{ postgresql_user_contype }}"
+    users: "{{ postgresql_user_name }}"
+    method: "{{ postgresql_user_login_method }}"
+  become_user: "{{ postgresql_system_user }}"
+  notify:
+    - 'Restart the postgresql service'
+
+- name: "Create the database {{ postgresql_database_name }}"
+  community.postgresql.postgresql_db:
+    login_password: "{{ postgresql_login_password }}"
+    #
+    name: "{{ postgresql_database_name }}"
+    owner: "{{ postgresql_user_name }}"
+    encoding: "{{ postgresql_database_encoding }}"
+    lc_collate: "{{ postgresql_database_lc_collate }}"
+    lc_ctype: "{{ postgresql_database_lc_ctype }}"
+    template: "{{ postgresql_database_template }}"
+  become_user: "{{ postgresql_system_user }}"
+  notify:
+    - 'Restart the postgresql service'
+
+- name: "Make the unprivileged user owner of the database {{ postgresql_database_name }}"
+  community.postgresql.postgresql_owner:
+    login_password: "{{ postgresql_login_password }}"
+    #
+    db: "{{ postgresql_database_name }}"
+    new_owner: "{{ postgresql_user_name }}"
+  become_user: "{{ postgresql_system_user }}"
+  notify:
+    - 'Restart the postgresql service'
+
+- name: "Grant all permissions on the database {{ postgresql_database_name }}"
+  community.postgresql.postgresql_privs:
+    login_password: "{{ postgresql_login_password }}"
+    #
+    database: 'postgres'
+    role: "{{ postgresql_user_name }}"
+    privs: ALL
+    obj: "{{ postgresql_database_name }}"
+    type: database
+  become_user: "{{ postgresql_system_user }}"
+  notify:
+    - 'Restart the postgresql service'
+
+- name: 'Flush handlers'
+  ansible.builtin.meta: flush_handlers
