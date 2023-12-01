@@ -3,6 +3,7 @@
 
 postgresql_service_name: 'postgresql.service'
 postgresql_system_user: 'postgres'
+postgresql_path_to_pg_hba_conf: '/var/lib/pgsql/data/pg_hba.conf'
 
 postgresql_database_encoding: 'UTF-8'
 postgresql_database_lc_collate: 'en_US.UTF-8'
