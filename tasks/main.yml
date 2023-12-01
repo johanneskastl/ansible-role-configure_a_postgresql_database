@@ -13,6 +13,7 @@
     name: "{{ postgresql_user_name }}"
     password: "{{ postgresql_user_password }}"
   become_user: "{{ postgresql_system_user }}"
+  become: true
   notify:
     - 'Restart the postgresql service'
 
@@ -23,6 +24,7 @@
     users: "{{ postgresql_user_name }}"
     method: "{{ postgresql_user_login_method }}"
   become_user: "{{ postgresql_system_user }}"
+  become: true
   notify:
     - 'Restart the postgresql service'
 
@@ -37,6 +39,7 @@
     lc_ctype: "{{ postgresql_database_lc_ctype }}"
     template: "{{ postgresql_database_template }}"
   become_user: "{{ postgresql_system_user }}"
+  become: true
   notify:
     - 'Restart the postgresql service'
 
@@ -47,6 +50,7 @@
     db: "{{ postgresql_database_name }}"
     new_owner: "{{ postgresql_user_name }}"
   become_user: "{{ postgresql_system_user }}"
+  become: true
   notify:
     - 'Restart the postgresql service'
 
@@ -60,6 +64,7 @@
     obj: "{{ postgresql_database_name }}"
     type: database
   become_user: "{{ postgresql_system_user }}"
+  become: true
   notify:
     - 'Restart the postgresql service'
 
