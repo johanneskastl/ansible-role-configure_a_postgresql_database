@@ -27,6 +27,19 @@ Normally the privileged user is called `postgres`. If this is not the case, you
 can handover the user name using the following variable:
 
 - `postgresql_login_user` (String): name of the administrative/privileged user
+  that is used to create the new user, i.e. this user is logged in with
+
+## Creating a privileged user
+
+In case you want to create a privileged user, you can set the new user's role
+attribute flags using the variable `postgresql_user_role_attr_flags`. This
+variable expects a comma-separated list of flags, as explained in the
+[postgresql collection's
+documentation](https://docs.ansible.com/ansible/latest/collections/community/postgresql/postgresql_user_module.html#parameter-role_attr_flags).
+
+- `postgresql_user_role_attr_flags` (String): comma-separated list of user
+  attribute flags. If omitted the newly created user will be an unprivileged
+  user (i.e. this defaults to `''`).
 
 ## User defaults
 
