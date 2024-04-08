@@ -13,6 +13,7 @@
     #
     name: "{{ postgresql_user_name }}"
     password: "{{ postgresql_user_password }}"
+    role_attr_flags: "{{ postgresql_user_role_attr_flags | default('') }}"
   become_user: "{{ postgresql_system_user }}"
   become: true
   notify:
