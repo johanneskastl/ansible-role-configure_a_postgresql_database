@@ -51,7 +51,7 @@
     login_user: "{{ postgresql_login_user }}"
     login_password: "{{ postgresql_login_password }}"
     #
-    db: "{{ postgresql_database_name }}"
+    login_db: "{{ postgresql_database_name }}"
     new_owner: "{{ postgresql_user_name }}"
   become_user: "{{ postgresql_system_user }}"
   become: true
@@ -63,7 +63,7 @@
     login_user: "{{ postgresql_login_user }}"
     login_password: "{{ postgresql_login_password }}"
     #
-    database: 'postgres'
+    login_db: 'postgres'
     role: "{{ postgresql_user_name }}"
     privs: ALL
     obj: "{{ postgresql_database_name }}"
